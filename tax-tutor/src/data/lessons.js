@@ -492,6 +492,78 @@ export const LESSONS = [
       },
     ],
   },
+  {
+    id: ‘t18-charitable-marital’,
+    chapterKey: ‘ch18’,
+    track: ‘Transfer taxes’,
+    title: ‘Charitable and marital deductions — QTIP, bypass trusts, and portability’,
+    estMinutes: 14,
+    blocks: [
+      {
+        type: ‘p’,
+        text: ‘The charitable and marital deductions are each unlimited in amount. Knowing their conditions, exceptions, and planning applications is central to transfer tax practice.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Charitable deduction (§2055 estate / §2522 gift)’,
+      },
+      {
+        type: ‘ul’,
+        items: [
+          ‘§2055 (estate): unlimited deduction for transfers to qualifying domestic charities, governments, and certain foreign organizations.’,
+          ‘§2522 (gift): same organizations; also unlimited.’,
+          ‘Split-interest trusts: a charitable remainder trust (CRT) pays an annuity or unitrust amount to a non-charitable beneficiary for a term; the remainder passes to charity. A charitable lead trust (CLT) pays income to charity first; the remainder passes to heirs.’,
+          ‘The deductible amount equals the present value of the charitable interest computed using the §7520 rate.’,
+        ],
+      },
+      {
+        type: ‘h2’,
+        text: ‘Marital deduction and the terminable interest rule’,
+      },
+      {
+        type: ‘p’,
+        text: ‘The unlimited marital deduction (§2056 estate / §2523 gift) is available for transfers to a U.S. citizen surviving spouse. However, a terminable interest — one that will end on the occurrence of an event and then pass to a third party — generally does not qualify. Policy: prevent a deduction now for property that will escape tax in the surviving spouse\’s estate entirely.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘QTIP — the key exception to the terminable interest rule’,
+      },
+      {
+        type: ‘p’,
+        text: ‘Qualified terminable interest property (QTIP) qualifies for the marital deduction even though it is a terminable interest. Requirements: (1) the surviving spouse receives all income from the property at least annually, (2) no person (including the surviving spouse) has a power to appoint the property to anyone other than the surviving spouse during the survivor\’s lifetime, and (3) the executor makes the QTIP election on Form 706. The trade-off: QTIP is included in the surviving spouse\’s gross estate at death under §2044.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Power of appointment trust’,
+      },
+      {
+        type: ‘p’,
+        text: ‘A marital trust where the surviving spouse holds a general power of appointment over the trust assets. Because the survivor can appoint the assets to themselves or their estate, the full value qualifies for the marital deduction and is included in the survivor\’s estate.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Bypass (credit shelter) trust’,
+      },
+      {
+        type: ‘p’,
+        text: ‘Uses the first-to-die spouse\’s applicable exclusion amount to fund a trust for children or other beneficiaries. The surviving spouse may receive income and limited principal but holds no general power of appointment. Result: the bypass trust is not included in the surviving spouse\’s estate — effectively allowing both spouses\’ exclusion amounts to shelter assets from estate tax.’,
+      },
+      {
+        type: ‘callout’,
+        variant: ‘tip’,
+        title: ‘Bypass trust vs portability’,
+        text: ‘Portability (electing to transfer the DSUE) achieves a similar result with less administration but requires a timely Form 706 filing, and the DSUE is not indexed for inflation after transfer. Bypass trusts lock in the exclusion amount at death and allow future appreciation to grow outside both estates.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Non-citizen spouse’,
+      },
+      {
+        type: ‘p’,
+        text: ‘The unlimited marital deduction is not available for transfers to a non-citizen surviving spouse. A qualified domestic trust (QDOT) can preserve the deduction: the trust must have at least one U.S. trustee and meet distribution restrictions that ensure the U.S. can collect estate tax on distributions to the non-citizen spouse.’,
+      },
+    ],
+  },
 ];
 
 export function getLessonById(id) {
