@@ -413,6 +413,85 @@ export const LESSONS = [
       },
     ],
   },
+  {
+    id: ‘t18-estate-formula’,
+    chapterKey: ‘ch18’,
+    track: ‘Transfer taxes’,
+    title: ‘Estate tax formula: gross estate inclusions, deductions, and §2001 computation’,
+    estMinutes: 16,
+    blocks: [
+      {
+        type: ‘p’,
+        text: ‘The estate tax formula follows a precise sequence: gross estate minus deductions equals taxable estate; add adjusted taxable gifts; compute tentative tax; subtract gift taxes paid and the unified credit. Each step has detailed rules.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Gross estate inclusions (§§2033–2044)’,
+      },
+      {
+        type: ‘ul’,
+        items: [
+          ‘§2033: All property the decedent owned at death — valued at date-of-death FMV.’,
+          ‘§2040: Joint tenancy (JTWROS) — 100% included except for spouses (50% for spousal JTWROS). For non-spouses: include the fraction equal to the decedent\’s contribution divided by total consideration paid.’,
+          ‘§2042: Life insurance — included if (a) proceeds are payable to the estate, or (b) the decedent held any "incidents of ownership" (right to change beneficiary, borrow against the policy, assign, surrender, or exercise any option).’,
+          ‘§2038: Revocable transfers — anything the decedent could revoke, alter, amend, or terminate at death.’,
+          ‘§2036: Transfers with retained life estate or retained control over income or enjoyment are pulled back into the gross estate.’,
+          ‘§2039: Annuities — the value of a survivor benefit is included if the decedent had a right to payments.’,
+          ‘§2041: General powers of appointment (power to appoint to oneself, one\’s creditors, one\’s estate, or creditors of one\’s estate) cause inclusion; limited or special powers do not.’,
+        ],
+      },
+      {
+        type: ‘h2’,
+        text: ‘Deductions from gross estate’,
+      },
+      {
+        type: ‘ul’,
+        items: [
+          ‘§2053: Debts of the decedent; administration expenses (executor fees, attorney fees, court costs, funeral expenses).’,
+          ‘§2054: Casualty or theft losses during estate administration (only if not claimed on the estate\’s income tax return).’,
+          ‘§2055: Charitable deduction — unlimited for qualifying transfers to charitable organizations.’,
+          ‘§2056: Marital deduction — unlimited for qualifying transfers to a U.S. citizen surviving spouse.’,
+          ‘State death taxes paid are deductible (not a credit) under current law.’,
+        ],
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2001 tentative tax computation’,
+      },
+      {
+        type: ‘ol’,
+        items: [
+          ‘Taxable estate + adjusted taxable gifts (all post-1976 taxable gifts at their original gift-time values) = cumulative tax base.’,
+          ‘Apply the unified rate schedule to the tax base → tentative tax.’,
+          ‘Subtract gift taxes paid (or payable) on post-1976 taxable gifts.’,
+          ‘Subtract the applicable credit amount (unified credit).’,
+          ‘Result = net federal estate tax due.’,
+        ],
+      },
+      {
+        type: ‘callout’,
+        variant: ‘tip’,
+        title: ‘Why add back adjusted taxable gifts?’,
+        text: ‘Adding prior taxable gifts pushes the estate into higher rate brackets — reflecting the cumulative unified system. Subtracting gift taxes previously paid prevents double-taxation of the same dollars.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Applicable exclusion amount and portability’,
+      },
+      {
+        type: ‘p’,
+        text: ‘For 2025, the applicable exclusion amount is approximately $13.99 million per person. The unused portion of a deceased spouse\’s applicable exclusion — the deceased spousal unused exclusion (DSUE) — can be transferred to the surviving spouse by making a portability election on a timely filed Form 706. This election must be made even if no estate tax is otherwise owed.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Alternate valuation date’,
+      },
+      {
+        type: ‘p’,
+        text: ‘The executor may elect to value the gross estate six months after death only if the election would reduce BOTH the gross estate value AND the estate tax liability. Partial elections are not permitted.’,
+      },
+    ],
+  },
 ];
 
 export function getLessonById(id) {
