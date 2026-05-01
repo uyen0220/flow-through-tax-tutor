@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <pattern id="ruled" width="200" height="28" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="27.5" x2="200" y2="27.5" stroke="#D9CFB8" stroke-width="0.7"></line>
+    </pattern>
+  </defs>
+  <rect width="200" height="200" fill="#FAF6EE"></rect>
+  <rect width="200" height="200" fill="url(#ruled)"></rect>
+  <line x1="36" y1="0" x2="36" y2="200" stroke="#E8B84A" stroke-width="0.8" opacity="0.5"></line>
+</svg>
