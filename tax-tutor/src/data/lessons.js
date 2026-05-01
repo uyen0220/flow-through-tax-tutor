@@ -564,6 +564,93 @@ export const LESSONS = [
       },
     ],
   },
+  {
+    id: ‘t18-special-valuation’,
+    chapterKey: ‘ch18’,
+    track: ‘Transfer taxes’,
+    title: ‘Special valuation: FLPs, GRATs, and §§2701–2704’,
+    estMinutes: 14,
+    blocks: [
+      {
+        type: ‘p’,
+        text: ‘Advanced transfer tax planning often involves transferring assets at discounted values or shifting future appreciation out of the estate. Congress enacted §§2701–2704 to prevent the most aggressive techniques from undermining the unified transfer tax system.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘Family limited partnerships (FLPs) and valuation discounts’,
+      },
+      {
+        type: ‘ul’,
+        items: [
+          ‘Parents form an FLP, contribute appreciated assets (real estate, securities), and retain the general partner interest.’,
+          ‘LP interests are gifted to children at discounted values reflecting two recognized discounts.’,
+          ‘Lack of control (minority interest) discount: LP has no management rights — typically 15–35% of pro-rata FMV.’,
+          ‘Lack of marketability discount (DLOM): no public market for the LP interest — typically 15–30%.’,
+          ‘Combined discounts of 30–45% can significantly reduce the taxable gift or estate value.’,
+        ],
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2036 retained-interest trap’,
+      },
+      {
+        type: ‘p’,
+        text: ‘If the transferor retains the right to income, enjoyment, or control over transferred FLP assets — or if the transfer is not a bona fide sale for adequate consideration — the IRS can pull the full FMV of those assets back into the gross estate under §2036. Common red flags: commingling personal and FLP funds, failing to follow formalities, or using FLP assets as if they were still personally owned.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘GRATs (Grantor Retained Annuity Trusts)’,
+      },
+      {
+        type: ‘ul’,
+        items: [
+          ‘Grantor transfers appreciating assets to an irrevocable trust and retains an annuity for a fixed term.’,
+          ‘Taxable gift = FMV of transferred assets minus the present value of the retained annuity (discounted at the §7520 rate).’,
+          ‘"Zeroed-out" GRAT: the annuity is sized so that its present value equals the FMV transferred — resulting in a near-zero taxable gift.’,
+          ‘If assets grow faster than the §7520 hurdle rate, the excess passes to beneficiaries gift-tax-free.’,
+          ‘Risk: if the grantor dies during the GRAT term, the full trust value is included in the grantor\’s gross estate.’,
+        ],
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2701 — anti-freeze for preferred equity interests’,
+      },
+      {
+        type: ‘p’,
+        text: ‘When a family member transfers a junior equity interest (e.g., common stock) while retaining a senior interest (e.g., preferred stock), the retained senior interest is assigned zero value for gift tax purposes — unless it carries a "qualified payment right" (a cumulative preferred dividend at a fixed rate). This prevents the classic "estate freeze" of locking in the senior interest\’s value while shifting all future appreciation to heirs through the junior interest.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2702 — retained interests in trusts’,
+      },
+      {
+        type: ‘p’,
+        text: ‘When a grantor transfers property in trust and retains an interest, the retained interest is generally valued at zero — making the entire transfer a taxable gift. Exceptions: qualified personal residence trusts (QPRTs) and qualified annuity or unitrust interests (GRATs/GRUTs) may be valued using actuarial tables.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2703 — buy-sell agreements’,
+      },
+      {
+        type: ‘p’,
+        text: ‘Buy-sell agreements that set prices below FMV are disregarded for estate and gift tax valuation unless: (1) it is a bona fide business arrangement, (2) it is not a device to transfer property to family members for less than FMV, and (3) its terms are comparable to an arm\’s-length agreement between unrelated parties.’,
+      },
+      {
+        type: ‘h2’,
+        text: ‘§2704 — lapsing voting and liquidation rights’,
+      },
+      {
+        type: ‘p’,
+        text: ‘The lapse of a voting or liquidation right in a family-controlled entity is treated as a transfer by the holder of the lapsed right. This prevents families from artificially depressing values by creating rights that immediately lapse upon transfer.’,
+      },
+      {
+        type: ‘callout’,
+        variant: ‘warn’,
+        title: ‘Exam focus’,
+        text: ‘§2036 is the IRS\’s primary weapon against FLPs — know the retained-interest and adequate-consideration tests. For §2701, the key rule is: retained preferred interest is valued at zero unless it carries a qualified payment right.’,
+      },
+    ],
+  },
 ];
 
 export function getLessonById(id) {
