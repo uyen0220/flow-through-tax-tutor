@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Radii</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  .row { display: flex; gap: 18px; align-items: flex-end; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .box { width: 80px; height: 80px; background: #F5EFE2; border: 1px solid #9C8E7B; }
+  .name { font-family: var(--font-mono); font-size: 11px; color: var(--ink-1); }
+  .px { font-family: var(--font-ui); font-size: 11px; color: var(--ink-2); }
+  .pill { width: 120px; height: 40px; background: #2F6B4F; border-radius: 999px; }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="row">
+      <div class="item"><div class="box" style="border-radius: 6px;"></div><div class="name">--radius-sm</div><div class="px">6px</div></div>
+      <div class="item"><div class="box" style="border-radius: 12px;"></div><div class="name">--radius-md</div><div class="px">12px</div></div>
+      <div class="item"><div class="box" style="border-radius: 18px;"></div><div class="name">--radius-lg</div><div class="px">18px</div></div>
+      <div class="item"><div class="box" style="border-radius: 24px;"></div><div class="name">--radius-xl</div><div class="px">24px</div></div>
+      <div class="item"><div class="pill"></div><div class="name">--radius-pill</div><div class="px">999px</div></div>
+    </div>
+  </div>
+</body>
+</html>

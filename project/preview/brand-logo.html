@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Logo</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  body { background: #FAF6EE; }
+  .row { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 24px; align-items: center; }
+  .panel { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 14px; border: 1px solid #E8DDC4; border-radius: 12px; background: #F5EFE2;}
+  .panel.dark { background: #1F1A14; border-color: #1F1A14;}
+  .panel.dark .lbl { color: #D9CFB8;}
+  .lbl { font-family: var(--font-ui); font-size: 11px; color: var(--ink-2); }
+  img { max-width: 100%; height: auto; }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="row">
+      <div class="panel">
+        <img src="../assets/logo.svg" style="width: 240px;"/>
+        <div class="lbl">Wordmark · primary</div>
+      </div>
+      <div class="panel">
+        <img src="../assets/logo-mark.svg" style="width: 64px;"/>
+        <div class="lbl">Mark · favicon, avatar</div>
+      </div>
+      <div class="panel dark">
+        <img src="../assets/logo-mark.svg" style="width: 64px;"/>
+        <div class="lbl">Mark on ink</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

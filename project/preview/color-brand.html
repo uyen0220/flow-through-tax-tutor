@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Brand & semantic colors</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  body { background: #FFFDF8; }
+  .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .grp { display: flex; flex-direction: column; gap: 6px; }
+  .duo { display: flex; gap: 6px; }
+  .chip { flex: 1; height: 60px; border-radius: 12px; border: 1px solid rgba(27,58,107,0.08); }
+  .name { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 800; color: #1B3A6B; }
+  .hex { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6B7A95; }
+  .role { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 600; color: #6B7A95; }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="row">
+      <div class="grp">
+        <div class="duo"><div class="chip" style="background:#1B3A6B"></div><div class="chip" style="background:#DCE4F0"></div></div>
+        <div class="name">Brand blue</div>
+        <div class="hex">#1B3A6B · #DCE4F0</div>
+        <div class="role">Headings, body, brand</div>
+      </div>
+      <div class="grp">
+        <div class="duo"><div class="chip" style="background:#FBC02D"></div><div class="chip" style="background:#FFF1C2"></div></div>
+        <div class="name">Sunshine yellow</div>
+        <div class="hex">#FBC02D · #FFF1C2</div>
+        <div class="role">CTA, highlight, streak</div>
+      </div>
+      <div class="grp">
+        <div class="duo"><div class="chip" style="background:#2E7CD6"></div><div class="chip" style="background:#D9E7F8"></div></div>
+        <div class="name">Link blue</div>
+        <div class="hex">#2E7CD6 · #D9E7F8</div>
+        <div class="role">Links, info, tutor chat</div>
+      </div>
+      <div class="grp">
+        <div class="duo"><div class="chip" style="background:#D24545"></div><div class="chip" style="background:#FBDADA"></div></div>
+        <div class="name">Friendly red</div>
+        <div class="hex">#D24545 · #FBDADA</div>
+        <div class="role">Errors, danger</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

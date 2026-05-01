@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Tutor chat bubbles</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  body { background: #FFFDF8; font-family: 'Nunito', sans-serif;}
+  .chat { display: flex; flex-direction: column; gap: 10px; max-width: 540px;}
+  .row { display: flex; align-items: flex-start; gap: 10px; }
+  .row.user { justify-content: flex-end; }
+  .av { width: 30px; height: 30px; border-radius: 50%; background: #FBC02D; color: #1B3A6B; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .bubble { border-radius: 14px; padding: 10px 14px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 500; line-height: 1.55; max-width: 78%;}
+  .bubble.tutor { background: #D9E7F8; color: #15406F; border-bottom-left-radius: 4px; }
+  .bubble.user { background: #1B3A6B; color: #FFFDF8; border-bottom-right-radius: 4px; font-weight: 600;}
+  .ref { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; background: rgba(27,58,107,0.08); padding: 1px 5px; border-radius: 4px; }
+  .bubble.user .ref { background: rgba(255,255,255,0.18);}
+  em { color: #1B3A6B; font-weight: 700;}
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="chat">
+      <div class="row">
+        <div class="av">§</div>
+        <div class="bubble tutor">A partnership doesn't pay its own income tax — it hands every partner a <span class="ref">Sch. K-1</span> and says: <em>here's your share, go report it.</em></div>
+      </div>
+      <div class="row user">
+        <div class="bubble user">Wait, but what about guaranteed payments?</div>
+      </div>
+      <div class="row">
+        <div class="av">§</div>
+        <div class="bubble tutor">Good catch! Guaranteed payments are deductible to the partnership and ordinary income to the partner — see <span class="ref">§707(c)</span>. Want a worked example?</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

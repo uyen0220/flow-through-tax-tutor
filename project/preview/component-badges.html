@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Badges & pills</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px;}
+  .label { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); width: 120px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-family: var(--font-ui); font-size: 12px; font-weight: 600; }
+  .ok { background: #DDE9DF; color: #16382A;}
+  .warn { background: #FAEEC6; color: #7A5E16;}
+  .err { background: #F5DDD3; color: #6B2615;}
+  .info { background: #DCE7EF; color: #2A4A63;}
+  .neutral { background: #EFE7D4; color: #3A3128;}
+  .outline { background: transparent; border: 1px solid #9C8E7B; color: #3A3128;}
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor;}
+  .ref { font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 999px; background: #F5EFE2; color: #1F1A14; border: 1px solid #E8DDC4; }
+  .streak { background: #E8B84A; color: #1F1A14;}
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="row">
+      <div class="label">Status</div>
+      <span class="pill ok"><span class="dot"></span>Mastered</span>
+      <span class="pill warn"><span class="dot"></span>Needs review</span>
+      <span class="pill err"><span class="dot"></span>Incorrect</span>
+      <span class="pill info"><span class="dot"></span>Tutor tip</span>
+      <span class="pill neutral">Optional</span>
+      <span class="pill outline">Locked</span>
+    </div>
+    <div class="row">
+      <div class="label">Code refs</div>
+      <span class="ref">§721</span>
+      <span class="ref">§704(b)</span>
+      <span class="ref">§754</span>
+      <span class="ref">Form 1065</span>
+      <span class="ref">Sch. K-1, L. 11</span>
+    </div>
+    <div class="row">
+      <div class="label">Streaks / count</div>
+      <span class="pill streak">🔥 7-day streak</span>
+      <span class="pill ok">12 / 14 correct</span>
+      <span class="pill info">3 hints left</span>
+    </div>
+  </div>
+</body>
+</html>

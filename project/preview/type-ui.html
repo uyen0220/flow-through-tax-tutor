@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>UI & mono type</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .ui { font-family: var(--font-ui); color: var(--ink); }
+  .mono { font-family: var(--font-mono); color: var(--ink); }
+  .meta { font-family: var(--font-ui); font-size: 11px; color: var(--ink-2); margin-top: 4px;}
+  .eyebrow { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="grid">
+      <div>
+        <div class="eyebrow">UI · Inter</div>
+        <div class="ui" style="font-size: 20px; font-weight: 600; margin-top:8px;">Continue chapter</div>
+        <div class="meta">Button · 20 / 600</div>
+        <div class="ui" style="font-size: 14px; font-weight: 500; color: var(--ink-1); margin-top:8px;">Glossary · Settings · Notes</div>
+        <div class="meta">Nav · 14 / 500</div>
+        <div class="ui" style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-top:8px;">Chapter 9 · Lesson 3 of 12</div>
+        <div class="meta">Eyebrow · 11 / 600 · 0.08em</div>
+      </div>
+      <div>
+        <div class="eyebrow">Mono · JetBrains Mono</div>
+        <div class="mono" style="font-size: 18px; font-weight: 500; margin-top:8px;">§704(b)</div>
+        <div class="meta">Code section ref · 18 / 500</div>
+        <div class="mono" style="font-size: 14px; color: var(--ink-1); margin-top:8px;">Form 1065 · Sch. K-1 · L. 11</div>
+        <div class="meta">Form refs · 14 / 400</div>
+        <div class="mono" style="font-size: 14px; margin-top:8px;">$ 12,500.00</div>
+        <div class="meta">Tabular figures · 14 / 400</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Voice</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .panel { padding: 14px 16px; border-radius: 12px; border: 1px solid #E8DDC4; }
+  .yes { background: #DDE9DF; border-color: #B8CFBE; }
+  .no { background: #F5DDD3; border-color: #E5B9A8; }
+  .head { font-family: var(--font-ui); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;}
+  .yes .head { color: #16382A;}
+  .no .head { color: #6B2615;}
+  .quote { font-family: var(--font-body); font-size: 14.5px; line-height: 1.55; color: var(--ink); }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="grid">
+      <div class="panel yes">
+        <div class="head">✓ This is the tutor</div>
+        <div class="quote">"A partnership doesn't pay its own income tax. Instead, it hands every partner a Schedule K-1 and says: <em>here's your share — go report it.</em>"</div>
+      </div>
+      <div class="panel no">
+        <div class="head">✗ Not the tutor</div>
+        <div class="quote">"Pursuant to IRC §704(b), allocations must possess substantial economic effect."</div>
+      </div>
+      <div class="panel yes">
+        <div class="head">✓ Stuck-hint</div>
+        <div class="quote">"Stuck? Remember: a contribution of <em>services</em> doesn't get the §721 nonrecognition treatment."</div>
+      </div>
+      <div class="panel no">
+        <div class="head">✗ Too breezy</div>
+        <div class="quote">"🎉 Awesome job!! You're crushing it!! 💪"</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

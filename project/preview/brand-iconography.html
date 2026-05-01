@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Iconography — Lucide</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 10px; border-radius: 10px; background: #F5EFE2; border: 1px solid #EDE4CF;}
+  .item svg { stroke-width: 1.75; color: #1F1A14; width: 22px; height: 22px;}
+  .lbl { font-family: var(--font-ui); font-size: 11px; color: var(--ink-1); text-align: center;}
+  .desc { font-family: var(--font-ui); font-size: 11px; color: var(--ink-2); margin-bottom: 12px;}
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="desc">Lucide · 1.75px stroke · inherits currentColor · loaded via CDN</div>
+    <div class="grid">
+      <div class="item"><i data-lucide="book-open"></i><div class="lbl">Lesson</div></div>
+      <div class="item"><i data-lucide="pencil-line"></i><div class="lbl">Practice</div></div>
+      <div class="item"><i data-lucide="bookmark"></i><div class="lbl">Glossary</div></div>
+      <div class="item"><i data-lucide="sparkles" style="color:#2F6B4F"></i><div class="lbl">Tutor</div></div>
+      <div class="item"><i data-lucide="target"></i><div class="lbl">Mastery</div></div>
+      <div class="item"><i data-lucide="flame" style="color:#E8B84A"></i><div class="lbl">Streak</div></div>
+      <div class="item"><i data-lucide="notebook-pen"></i><div class="lbl">Note</div></div>
+      <div class="item"><i data-lucide="scale"></i><div class="lbl">§ ref</div></div>
+      <div class="item"><i data-lucide="file-text"></i><div class="lbl">Form</div></div>
+      <div class="item"><i data-lucide="bookmark-plus"></i><div class="lbl">Save</div></div>
+      <div class="item"><i data-lucide="settings-2"></i><div class="lbl">Settings</div></div>
+      <div class="item"><i data-lucide="search"></i><div class="lbl">Search</div></div>
+    </div>
+    <script>lucide.createIcons();</script>
+  </div>
+</body>
+</html>

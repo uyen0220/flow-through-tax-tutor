@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Color in use</title>
+<link rel="stylesheet" href="_card-base.css"/>
+<style>
+  body { background: #FAF6EE; }
+  .demo { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .panel { padding: 18px; border-radius: 12px; border: 1px solid #D9CFB8; background: #F5EFE2;}
+  .label { font-family: var(--font-ui); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5E4E; margin-bottom: 10px; }
+  .body-text { font-family: var(--font-body); font-size: 16px; color: #1F1A14; line-height: 1.55;}
+  mark { background: linear-gradient(180deg, transparent 50%, #FAEEC6 50%); padding: 0 2px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-family: var(--font-ui); font-size: 12px; font-weight: 600; }
+  .pill.ok { background: #DDE9DF; color: #16382A;}
+  .pill.warn { background: #FAEEC6; color: #7A5E16;}
+  .pill.err { background: #F5DDD3; color: #6B2615;}
+  .pill.info { background: #DCE7EF; color: #2A4A63;}
+  a { color: #2F6B4F; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body class="ftt">
+  <div class="card">
+    <div class="demo">
+      <div class="panel">
+        <div class="label">Lesson body</div>
+        <div class="body-text">A partnership doesn't pay its own income tax. <mark>It hands every partner a Schedule K-1.</mark> See <a href="#">§704(b)</a>.</div>
+      </div>
+      <div class="panel">
+        <div class="label">Status pills</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <span class="pill ok">Mastered</span>
+          <span class="pill warn">Needs review</span>
+          <span class="pill err">Incorrect</span>
+          <span class="pill info">Tutor tip</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
