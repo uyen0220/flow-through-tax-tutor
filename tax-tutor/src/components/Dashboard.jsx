@@ -1,42 +1,32 @@
-import { Icon, Button, Pill, Ref } from './Primitives';
+import { Icon, Button, Pill } from './Primitives';
+import { CRAM_LESSON_ORDER } from '../data/cramSession';
 
-export function Dashboard({ onOpenLesson, onOpenPractice }) {
+export function Dashboard({ onStartCram, onOpenTopics, onOpenLesson, onOpenPractice, onOpenPremium }) {
   return (
     <div className="dash">
-      <h1>Hi Lila — pick up where you left off.</h1>
-      <div className="greeting-sub">You're 7 days into your streak. Don't break it on us now.</div>
-
-      <div className="stats">
-        <div className="stat">
-          <div className="lbl">Streak</div>
-          <div className="val">
-            7
-            <Icon name="flame" size={28} color="var(--highlight)" />
-          </div>
-          <div className="sub">days in a row</div>
-        </div>
-        <div className="stat">
-          <div className="lbl">Mastery</div>
-          <div className="val">
-            42<span style={{ fontSize: 22, color: 'var(--ink-2)', fontWeight: 500 }}>/100</span>
-          </div>
-          <div className="sub">across 4 chapters</div>
-        </div>
-        <div className="stat">
-          <div className="lbl">Practice today</div>
-          <div className="val">
-            9<span style={{ fontSize: 22, color: 'var(--ink-2)', fontWeight: 500 }}>/12</span>
-          </div>
-          <div className="sub">problems correct</div>
-        </div>
+      <h1>Exam cram — flow-through & transfer taxes</h1>
+      <div className="greeting-sub">
+        Short sessions before an exam. Open any topic or run the ordered cram path ({CRAM_LESSON_ORDER.length}{' '}
+        lessons). Nothing is stored on a server.
       </div>
 
-      <div className="resume" onClick={onOpenLesson}>
+      <div
+        className="resume"
+        onClick={onStartCram}
+        style={{ marginBottom: 28, cursor: 'pointer' }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={e => e.key === 'Enter' && onStartCram()}
+      >
         <div className="body">
-          <div className="eyebrow">Resume · Chapter 9 · Lesson 3 of 12</div>
-          <h3>Contributing property — and the §721 rule</h3>
-          <div className="sub">~ 8 min remaining · You stopped after the cash-vs-property example.</div>
-          <Button variant="primary" iconRight="arrow-right">Continue lesson</Button>
+          <div className="eyebrow">Start here</div>
+          <h3>Run the cram path</h3>
+          <div className="sub">
+            Partnerships (formation, basis, distributions) → S corporation (eligibility, basis, BIG, PII) → transfer taxes (gift, estate, GST).
+          </div>
+          <Button variant="primary" iconRight="arrow-right">
+            Start cram
+          </Button>
         </div>
         <div className="art">
           <img src="/illustration-partnership.svg" alt="" style={{ width: '100%' }} />
@@ -44,47 +34,67 @@ export function Dashboard({ onOpenLesson, onOpenPractice }) {
       </div>
 
       <div className="section-head">
-        <h2>Up next in Subchapter K</h2>
-        <a href="#" onClick={e => e.preventDefault()}>View all lessons</a>
+        <h2>Jump in</h2>
       </div>
       <div className="grid-2">
-        <div className="lesson-card" onClick={onOpenLesson}>
-          <div className="eyebrow">Chapter 9 · Lesson 4</div>
-          <div className="title">Inside basis vs. outside basis</div>
+        <div className="lesson-card" onClick={onOpenTopics}>
+          <div className="eyebrow">All chapters</div>
+          <div className="title">Browse topics</div>
           <div className="meta">
-            <span>~ 12 min</span> · <Pill variant="neutral">Up next</Pill>
-          </div>
-          <div className="lc-progress"><div style={{ width: '0%' }} /></div>
-        </div>
-        <div className="lesson-card" onClick={onOpenPractice}>
-          <div className="eyebrow">Chapter 10 · Practice set</div>
-          <div className="title">Hot-asset distributions, three ways</div>
-          <div className="meta">
-            <span>5 problems</span> · <Pill variant="warn">Needs review</Pill>
+            <Pill variant="neutral">Lessons</Pill>
+            <span>Ch 9–11 &amp; 18</span>
           </div>
           <div className="lc-progress">
-            <div style={{ width: '35%', background: 'var(--highlight)' }} />
+            <div style={{ width: '100%' }} />
+          </div>
+        </div>
+        <div className="lesson-card" onClick={onOpenPremium}>
+          <div className="eyebrow">Annotated answer key</div>
+          <div className="title">Premium, Inc. · Form 1120-S</div>
+          <div className="meta">
+            <Pill variant="ok">Read-only</Pill>
+            <span>Schedule K, M-1, M-2, K-1</span>
+          </div>
+          <div className="lc-progress">
+            <div style={{ width: '100%', background: 'var(--accent)' }} />
           </div>
         </div>
       </div>
 
       <div className="section-head" style={{ marginTop: 28 }}>
-        <h2>From your last practice attempt</h2>
-        <a href="#" onClick={e => e.preventDefault()}>Open practice queue</a>
+        <h2>Practice sets</h2>
       </div>
       <div className="grid-2">
-        <div className="lesson-card">
-          <div className="eyebrow">Got tripped up</div>
-          <div className="title" style={{ fontSize: 18 }}>§704(b) substantial-economic-effect test</div>
+        <div className="lesson-card" onClick={() => onOpenPractice('s-corp-core')}>
+          <div className="eyebrow">S corporation</div>
+          <div className="title">Eligibility, basis, BIG, PII, distributions</div>
           <div className="meta">
-            <Ref>§704(b)</Ref> <Pill variant="err">2 of 3 missed</Pill>
+            <Icon name="pencil-line" size={14} />
+            <span>Interactive checks</span>
           </div>
         </div>
-        <div className="lesson-card">
-          <div className="eyebrow">Solid</div>
-          <div className="title" style={{ fontSize: 18 }}>Schedule K-1 line items, top to bottom</div>
+        <div className="lesson-card" onClick={() => onOpenPractice('partnership-formation')}>
+          <div className="eyebrow">Partnership · Ch 9</div>
+          <div className="title">Anna &amp; Ben formation drill</div>
           <div className="meta">
-            <Ref>Sch. K-1</Ref> <Pill variant="ok">5 of 5 correct</Pill>
+            <span>§721 · §722 · §723</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid-2" style={{ marginTop: 14 }}>
+        <div className="lesson-card" onClick={() => onOpenPractice('transfer-tax-quick')}>
+          <div className="eyebrow">Ch 18</div>
+          <div className="title">Gift &amp; estate warm-up</div>
+          <div className="meta">
+            <span>True/false + concepts</span>
+          </div>
+        </div>
+        <div className="lesson-card" onClick={() => onOpenLesson('p-ch9-i-partnership-overview')}>
+          <div className="eyebrow">Lesson</div>
+          <div className="title">Partnership formation (read)</div>
+          <div className="meta">
+            <span>Open in reader</span>
           </div>
         </div>
       </div>
