@@ -98,6 +98,17 @@ export function Dashboard({ onStartCram, onOpenTopics, onOpenLesson, onOpenPract
           </div>
         </div>
       </div>
+
+      <div className="grid-2" style={{ marginTop: 14 }}>
+        <div className="lesson-card" onClick={() => onOpenPractice('partnership-distributions')}>
+          <div className="eyebrow">Partnership · Ch 10</div>
+          <div className="title">Distributions, §751 &amp; §754</div>
+          <div className="meta">
+            <Icon name="pencil-line" size={14} />
+            <span>Interactive checks</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
