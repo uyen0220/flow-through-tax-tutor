@@ -608,13 +608,14 @@ body {
   border: 1px solid var(--ink-5); border-radius: 12px; margin-bottom: 12px;
 }
 .progress-view .chapter-row .ch-head {
-  display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;
 }
 .progress-view .chapter-row .ch-title {
   font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--ink);
 }
 .progress-view .chapter-row .ch-pct {
   font-family: var(--font-mono); font-size: 13px; color: var(--ink-2);
+  flex-shrink: 0; margin-left: 12px;
 }
 .progress-view .chapter-row .bar {
   height: 8px; background: var(--ink-6); border-radius: 4px; overflow: hidden;
