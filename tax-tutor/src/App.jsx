@@ -1,61 +1,111 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { LeftNav, TopBar } from './components/Shell';
 import { Dashboard } from './components/Dashboard';
 import { LessonReader } from './components/LessonReader';
 import { TutorRail } from './components/TutorRail';
 import { PracticeProblem } from './components/PracticeProblem';
 import { Glossary } from './components/Glossary';
-import { ProgressView } from './components/ProgressView';
+import { Topics } from './components/Topics';
+import { PremiumAnnotated } from './components/PremiumAnnotated';
+import {
+  CRAM_LESSON_ORDER,
+  DEFAULT_LESSON_ID,
+  DEFAULT_PRACTICE_SET_ID,
+} from './data/cramSession';
 
 export default function App() {
   const [view, setView] = useState('dashboard');
-  const [chapter, setChapter] = useState('ch9');
+  const [chapter, setChapter] = useState('ch11');
+  const [lessonId, setLessonId] = useState(DEFAULT_LESSON_ID);
+  const [practiceSetId, setPracticeSetId] = useState(DEFAULT_PRACTICE_SET_ID);
 
   const showRail = view === 'lesson';
 
+  const cramIdx = useMemo(() => CRAM_LESSON_ORDER.indexOf(lessonId), [lessonId]);
+  const inCram = cramIdx >= 0;
+  const hasPrev = inCram && cramIdx > 0;
+  const hasNext = inCram && cramIdx >= 0 && cramIdx < CRAM_LESSON_ORDER.length - 1;
+
   const crumbs = (() => {
     if (view === 'dashboard') return ['Dashboard'];
-    if (view === 'lesson')    return ['Course', 'Chapter 9 — Partnerships', 'Lesson 3'];
-    if (view === 'practice')  return ['Practice', 'Chapter 9', 'Outside basis on formation'];
-    if (view === 'glossary')  return ['Glossary'];
-    if (view === 'progress')  return ['Progress'];
+    if (view === 'topics') return ['Topics'];
+    if (view === 'lesson') return ['Topics', 'Lesson'];
+    if (view === 'practice') return ['Practice'];
+    if (view === 'glossary') return ['Glossary'];
+    if (view === 'premium') return ['Premium, Inc.', 'Annotated'];
     return [];
   })();
 
-  const progressPct = view === 'lesson' ? 0.45 : view === 'practice' ? 0.4 : null;
+  function goNextLesson() {
+    if (hasNext) setLessonId(CRAM_LESSON_ORDER[cramIdx + 1]);
+    else setView('topics');
+  }
+
+  function goPrevLesson() {
+    if (hasPrev) setLessonId(CRAM_LESSON_ORDER[cramIdx - 1]);
+  }
+
+  function startCram() {
+    setLessonId(CRAM_LESSON_ORDER[0] ?? DEFAULT_LESSON_ID);
+    setView('lesson');
+  }
 
   return (
     <div className={`shell ${showRail ? '' : 'no-rail'}`}>
-      <LeftNav
-        activeView={view}
-        onNav={setView}
-        activeChapter={chapter}
-        onChapter={setChapter}
-      />
+      <LeftNav activeView={view} onNav={setView} activeChapter={chapter} onChapter={setChapter} />
       <div className="main">
-        <TopBar crumbs={crumbs} progress={progressPct} />
+        <TopBar crumbs={crumbs} />
         {view === 'dashboard' && (
           <Dashboard
-            onOpenLesson={() => setView('lesson')}
-            onOpenPractice={() => setView('practice')}
+            onStartCram={startCram}
+            onOpenTopics={() => setView('topics')}
+            onOpenLesson={id => {
+              setLessonId(id);
+              setView('lesson');
+            }}
+            onOpenPractice={id => {
+              setPracticeSetId(id);
+              setView('practice');
+            }}
+            onOpenPremium={() => setView('premium')}
+          />
+        )}
+        {view === 'topics' && (
+          <Topics
+            activeChapter={chapter}
+            onOpenLesson={id => {
+              setLessonId(id);
+              setView('lesson');
+            }}
           />
         )}
         {view === 'lesson' && (
           <LessonReader
-            onBack={() => setView('dashboard')}
-            onNext={() => setView('practice')}
-            onOpenPractice={() => setView('practice')}
+            lessonId={lessonId}
+            onOpenPractice={() => {
+              setPracticeSetId(DEFAULT_PRACTICE_SET_ID);
+              setView('practice');
+            }}
+            onOpenTopics={() => setView('topics')}
+            onNextLesson={goNextLesson}
+            onPrevLesson={goPrevLesson}
+            hasNext={hasNext}
+            hasPrev={hasPrev}
           />
         )}
         {view === 'practice' && (
-          <PracticeProblem onBack={() => setView('lesson')} />
+          <PracticeProblem
+            setId={practiceSetId}
+            onBack={() => setView('dashboard')}
+            onOpenTopics={() => setView('topics')}
+          />
         )}
         {view === 'glossary' && <Glossary />}
-        {view === 'progress' && <ProgressView />}
+        {view === 'premium' && <PremiumAnnotated onBack={() => setView('dashboard')} />}
       </div>
       {showRail && (
         <div className="rail">
-          <TutorRail />
+          <TutorRail key={lessonId} lessonId={lessonId} />
         </div>
       )}
     </div>

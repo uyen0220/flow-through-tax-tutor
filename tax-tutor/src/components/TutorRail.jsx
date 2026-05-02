@@ -1,43 +1,55 @@
 import { useState } from 'react';
-import { Icon, Button, Ref } from './Primitives';
+import { Icon, Button } from './Primitives';
+import { getLessonById } from '../data/lessons';
 
-const INITIAL_MSGS = [
-  {
-    who: 'tutor',
-    content: (
-      <>
-        A partnership doesn't pay its own income tax — it hands every partner a <Ref>Sch. K-1</Ref>{' '}
-        and says: <em>here's your share, go report it.</em>
-      </>
-    ),
-  },
-  { who: 'user', content: 'Wait, but what about guaranteed payments?' },
-  {
-    who: 'tutor',
-    content: (
-      <>
-        Good catch. Guaranteed payments are deductible to the partnership and ordinary income to the
-        partner — see <Ref>§707(c)</Ref>. Want a worked example?
-      </>
-    ),
-  },
-];
+export function TutorRail({ lessonId }) {
+  const lesson = getLessonById(lessonId);
+  const lessonTitle = lesson?.title ?? 'this topic';
 
-export function TutorRail() {
-  const [msgs, setMsgs] = useState(INITIAL_MSGS);
+  const systemPrompt =
+    `You are a concise tax tutor for a student using an exam-cram app (SWFT 2026). ` +
+    `The student is reading: "${lessonTitle}". ` +
+    `Answer in 2–4 sentences. Use IRC section numbers where relevant. ` +
+    `Only answer tax and accounting questions.`;
+
+  const [msgs, setMsgs] = useState([
+    { who: 'tutor', content: `On "${lessonTitle}" — ask me anything.` },
+  ]);
+  const [apiMsgs, setApiMsgs] = useState([]);
   const [draft, setDraft] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  function send() {
-    if (!draft.trim()) return;
+  async function send() {
+    if (!draft.trim() || loading) return;
     const text = draft;
     setDraft('');
+
+    const userMsg = { role: 'user', content: text };
+    const newApiMsgs = [...apiMsgs, userMsg];
+    setApiMsgs(newApiMsgs);
     setMsgs(m => [...m, { who: 'user', content: text }]);
-    setTimeout(() => {
-      setMsgs(m => [
-        ...m,
-        { who: 'tutor', content: <>Pulling up the regs… <em>(this is a mock)</em></> },
-      ]);
-    }, 400);
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: [{ role: 'system', content: systemPrompt }, ...newApiMsgs],
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? 'Request failed');
+
+      const reply = data.content;
+      setApiMsgs(m => [...m, { role: 'assistant', content: reply }]);
+      setMsgs(m => [...m, { who: 'tutor', content: reply }]);
+    } catch (err) {
+      setMsgs(m => [...m, { who: 'tutor', content: `Error: ${err.message}` }]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleKey(e) {
@@ -66,6 +78,12 @@ export function TutorRail() {
             <div className={`bubble ${m.who}`}>{m.content}</div>
           </div>
         ))}
+        {loading && (
+          <div className="tutor-msg tutor">
+            <div className="av">§</div>
+            <div className="bubble tutor">…</div>
+          </div>
+        )}
       </div>
 
       <div className="tutor-foot">
@@ -75,8 +93,9 @@ export function TutorRail() {
           value={draft}
           onChange={e => setDraft(e.target.value)}
           onKeyDown={handleKey}
+          disabled={loading}
         />
-        <Button variant="primary" size="sm" icon="arrow-up" onClick={send} />
+        <Button variant="primary" size="sm" icon="arrow-up" onClick={send} disabled={loading} />
       </div>
     </div>
   );
