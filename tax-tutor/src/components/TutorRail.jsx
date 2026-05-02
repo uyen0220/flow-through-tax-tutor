@@ -18,10 +18,12 @@ export function TutorRail({ lessonId }) {
   const [apiMsgs, setApiMsgs] = useState([]);
   const [draft, setDraft] = useState('');
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef(null);
+  const msgsRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (msgsRef.current) {
+      msgsRef.current.scrollTop = msgsRef.current.scrollHeight;
+    }
   }, [msgs, loading]);
 
   async function send() {
@@ -76,7 +78,7 @@ export function TutorRail({ lessonId }) {
         <Icon name="x" size={16} color="var(--ink-2)" />
       </div>
 
-      <div className="tutor-msgs">
+      <div className="tutor-msgs" ref={msgsRef}>
         {msgs.map((m, i) => (
           <div key={i} className={`tutor-msg ${m.who}`}>
             {m.who === 'tutor' && <div className="av">§</div>}
@@ -89,7 +91,6 @@ export function TutorRail({ lessonId }) {
             <div className="bubble tutor">…</div>
           </div>
         )}
-        <div ref={bottomRef} />
       </div>
 
       <div className="tutor-foot">
