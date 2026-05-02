@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Icon, Button } from './Primitives';
 import { getLessonById } from '../data/lessons';
 
@@ -18,6 +18,11 @@ export function TutorRail({ lessonId }) {
   const [apiMsgs, setApiMsgs] = useState([]);
   const [draft, setDraft] = useState('');
   const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [msgs, loading]);
 
   async function send() {
     if (!draft.trim() || loading) return;
@@ -84,6 +89,7 @@ export function TutorRail({ lessonId }) {
             <div className="bubble tutor">…</div>
           </div>
         )}
+        <div ref={bottomRef} />
       </div>
 
       <div className="tutor-foot">
