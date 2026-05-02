@@ -1,149 +1,175 @@
-import { useState } from 'react';
-import { Icon, Button, Pill, Ref } from './Primitives';
+import { useState, useMemo } from 'react';
+import { Icon, Button, Pill } from './Primitives';
+import { getPracticeSetById, checkQuestion } from '../data/practiceSets';
 
-export function PracticeProblem({ onBack }) {
-  const [step1] = useState({ value: '40000', state: 'done' });
-  const [step2, setStep2] = useState({ value: '', state: 'curr' });
+export function PracticeProblem({ setId, onBack, onOpenTopics }) {
+  const set = useMemo(() => getPracticeSetById(setId), [setId]);
+  const [qi, setQi] = useState(0);
+  const [status, setStatus] = useState('idle');
+  const [numericDraft, setNumericDraft] = useState('');
   const [showHint, setShowHint] = useState(false);
 
-  function check() {
-    const normalized = step2.value.replace(/[$,\s]/g, '');
-    if (normalized === '25000') {
-      setStep2(s => ({ ...s, state: 'done' }));
-    } else {
-      setStep2(s => ({ ...s, state: 'wrong' }));
-    }
+  const q = set.questions[qi];
+  const isLast = qi === set.questions.length - 1;
+
+  function resetForQuestion(nextIdx) {
+    setQi(nextIdx);
+    setStatus('idle');
+    setNumericDraft('');
+    setShowHint(false);
   }
 
-  const step2Done = step2.state === 'done';
+  function submitNumeric() {
+    const ok = checkQuestion(q, numericDraft);
+    setStatus(ok ? 'done' : 'wrong');
+  }
+
+  function submitTrueFalse(val) {
+    const ok = checkQuestion(q, val);
+    setStatus(ok ? 'done' : 'wrong');
+  }
+
+  function submitChoice(idx) {
+    const ok = checkQuestion(q, String(idx));
+    setStatus(ok ? 'done' : 'wrong');
+  }
+
+  function nextQuestion() {
+    if (!isLast) resetForQuestion(qi + 1);
+    else resetForQuestion(0);
+  }
 
   return (
     <div className="practice">
       <div className="header">
         <div>
-          <div className="eyebrow">Chapter 9 · Practice 2 of 5</div>
-          <div className="title">Outside basis on formation</div>
+          <div className="eyebrow">{set.eyebrow}</div>
+          <div className="title">{set.title}</div>
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <Pill variant="info" dot>3 hints left</Pill>
-          <Pill variant="neutral">~ 4 min</Pill>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <Pill variant="neutral">
+            Question {qi + 1} of {set.questions.length}
+          </Pill>
         </div>
       </div>
 
       <div className="stem">
-        <p>
-          <strong>Anna and Ben</strong> form the AB Partnership. Anna contributes $40,000 cash. Ben
-          contributes equipment with an FMV of $40,000 and an adjusted basis of $25,000. Each
-          receives a 50% partnership interest.
-        </p>
-        <div className="facts">
-          <div className="fact-row">
-            <span className="lbl">Anna — cash contributed</span>
-            <span className="val">$40,000</span>
-          </div>
-          <div className="fact-row">
-            <span className="lbl">Ben — equipment FMV</span>
-            <span className="val">$40,000</span>
-          </div>
-          <div className="fact-row">
-            <span className="lbl">Anna — % interest</span>
-            <span className="val">50%</span>
-          </div>
-          <div className="fact-row">
-            <span className="lbl">Ben — equipment basis</span>
-            <span className="val">$25,000</span>
-          </div>
-        </div>
+        <p>{q.prompt}</p>
       </div>
 
-      {/* Step 1 — done */}
-      <div className="step done">
+      <div className={`step ${status === 'done' ? 'done' : 'curr'}`}>
         <div className="step-head">
-          <div className="step-num"><Icon name="check" size={12} /></div>
-          Step 1 — Anna's outside basis
+          <div className="step-num">{status === 'done' ? <Icon name="check" size={12} /> : qi + 1}</div>
+          Your answer
         </div>
-        <div className="q">
-          What is Anna's outside basis in her partnership interest immediately after formation?
-        </div>
-        <div className="answer-row">
-          <div className="ans-correct">$40,000 ✓</div>
-          <Pill variant="ok" dot>Correct</Pill>
-        </div>
-        <div className="explain">
-          Cash contributions get a basis equal to the cash. No surprises here — see <Ref>§722</Ref>.
-        </div>
-      </div>
 
-      {/* Step 2 — current */}
-      <div className={`step ${step2Done ? 'done' : 'curr'}`}>
-        <div className="step-head">
-          <div className="step-num">
-            {step2Done ? <Icon name="check" size={12} /> : '2'}
+        {q.type === 'numeric' && (
+          <div className="answer-row" style={{ flexWrap: 'wrap' }}>
+            <input
+              className="input"
+              placeholder="Enter amount (numbers ok)"
+              value={numericDraft}
+              onChange={e => {
+                setNumericDraft(e.target.value);
+                setStatus('idle');
+              }}
+              onKeyDown={e => e.key === 'Enter' && status !== 'done' && submitNumeric()}
+              style={{ maxWidth: 220 }}
+              disabled={status === 'done'}
+            />
+            {status !== 'done' && (
+              <>
+                <Button variant="primary" size="sm" onClick={submitNumeric}>
+                  Check
+                </Button>
+                <Button variant="ghost" size="sm" icon="lightbulb" onClick={() => setShowHint(true)}>
+                  Hint
+                </Button>
+              </>
+            )}
           </div>
-          Step 2 — Ben's outside basis
-        </div>
-        <div className="q">
-          What is Ben's outside basis in his partnership interest immediately after formation?
-        </div>
-        <div className="answer-row">
-          {step2Done ? (
-            <>
-              <div className="ans-correct">$25,000 ✓</div>
-              <Pill variant="ok" dot>Correct</Pill>
-            </>
-          ) : (
-            <>
-              <input
-                className="input"
-                placeholder="$ amount"
-                value={step2.value}
-                onChange={e => setStep2(s => ({ ...s, value: e.target.value, state: 'curr' }))}
-                onKeyDown={e => e.key === 'Enter' && check()}
-                style={{ maxWidth: 200 }}
-              />
-              <Button variant="primary" size="sm" onClick={check}>Check</Button>
-              <Button variant="ghost" size="sm" icon="lightbulb" onClick={() => setShowHint(true)}>
-                Hint
+        )}
+
+        {q.type === 'truefalse' && status !== 'done' && (
+          <div className="answer-row" style={{ flexWrap: 'wrap' }}>
+            <Button variant="subtle" size="sm" onClick={() => submitTrueFalse('true')}>
+              True
+            </Button>
+            <Button variant="subtle" size="sm" onClick={() => submitTrueFalse('false')}>
+              False
+            </Button>
+          </div>
+        )}
+
+        {q.type === 'truefalse' && status === 'done' && (
+          <div className="answer-row">
+            <div className="ans-correct">{q.correctBool ? 'True' : 'False'} ✓</div>
+            <Pill variant="ok" dot>
+              Correct
+            </Pill>
+          </div>
+        )}
+
+        {q.type === 'choice' && status !== 'done' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
+            {q.choices.map((c, i) => (
+              <Button key={i} variant="ghost" style={{ justifyContent: 'flex-start' }} onClick={() => submitChoice(i)}>
+                {String.fromCharCode(65 + i)}. {c}
               </Button>
-            </>
-          )}
-        </div>
-        {step2.state === 'wrong' && (
-          <div className="explain" style={{ borderColor: 'var(--danger)', color: 'var(--danger-ink)', background: 'var(--danger-soft)' }}>
-            Not quite. Remember — outside basis on a property contribution isn't FMV.
+            ))}
           </div>
         )}
-        {showHint && !step2Done && (
-          <div className="hint">
-            <strong>Hint —</strong> §722 gives the contributing partner a basis equal to the{' '}
-            <em>basis of the property contributed</em>, not its FMV. Ben brought property with a
-            basis of $25,000.
-          </div>
-        )}
-        {step2Done && (
-          <div className="explain">
-            Right — §722 carries Ben's $25,000 basis over. The $15,000 of built-in gain rides on the
-            books and gets allocated back to Ben under §704(c) when realized.
-          </div>
-        )}
-      </div>
 
-      {/* Step 3 — locked */}
-      <div className="step" style={{ opacity: 0.55 }}>
-        <div className="step-head">
-          <div className="step-num">3</div>
-          Step 3 — Partnership's inside basis in the equipment
-        </div>
-        <div className="q" style={{ color: 'var(--ink-2)' }}>
-          Locked until you finish step 2.
-        </div>
+        {q.type === 'choice' && status === 'done' && (
+          <div className="answer-row">
+            <div className="ans-correct">
+              {String.fromCharCode(65 + q.correctChoiceIndex)}. {q.choices[q.correctChoiceIndex]} ✓
+            </div>
+            <Pill variant="ok" dot>
+              Correct
+            </Pill>
+          </div>
+        )}
+
+        {status === 'wrong' && (
+          <div
+            className="explain"
+            style={{
+              borderColor: 'var(--danger)',
+              color: 'var(--danger-ink)',
+              background: 'var(--danger-soft)',
+            }}
+          >
+            Not quite — try again or read the hint.
+          </div>
+        )}
+
+        {showHint && q.hint && status !== 'done' && (
+          <div className="hint">
+            <strong>Hint —</strong> {q.hint}
+          </div>
+        )}
+
+        {status === 'done' && (
+          <div className="explain">
+            <strong>Why —</strong> {q.explain}
+          </div>
+        )}
       </div>
 
       <div className="lesson-foot">
-        <Button variant="ghost" icon="arrow-left" onClick={onBack}>Back to lesson</Button>
-        <div style={{ display: 'flex', gap: 10 }}>
-          <Button variant="subtle">Skip</Button>
-          <Button variant="primary" iconRight="arrow-right">Submit attempt</Button>
+        <Button variant="ghost" icon="arrow-left" onClick={onBack}>
+          Back
+        </Button>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <Button variant="subtle" onClick={onOpenTopics}>
+            Topics
+          </Button>
+          {status === 'done' && (
+            <Button variant="primary" iconRight="arrow-right" onClick={nextQuestion}>
+              {isLast ? 'Restart set' : 'Next question'}
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -2,19 +2,19 @@ import { Icon } from './Primitives';
 import { Button } from './Primitives';
 
 const COURSE = [
-  { id: 'ch9',  num: '09', title: 'Partnerships: Formation & Basis', progress: 0.68, lessons: 12 },
-  { id: 'ch10', num: '10', title: 'Partnership Distributions',        progress: 0.23, lessons: 11 },
-  { id: 'ch11', num: '11', title: 'S Corporations',                   progress: 0.05, lessons: 10 },
-  { id: 'ch18', num: '18', title: 'Federal Gift & Estate Taxes',      progress: 0,    lessons: 9  },
+  { id: 'ch9', num: '09', title: 'Partnerships: Formation & Basis' },
+  { id: 'ch10', num: '10', title: 'Partnership Distributions' },
+  { id: 'ch11', num: '11', title: 'S Corporations' },
+  { id: 'ch18', num: '18', title: 'Federal Gift & Estate Taxes' },
 ];
 
 export function LeftNav({ activeView, onNav, activeChapter, onChapter }) {
   const navItems = [
-    { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard',      badge: null },
-    { id: 'lesson',    icon: 'book-open',         label: "Today's lesson", badge: null },
-    { id: 'practice',  icon: 'pencil-line',        label: 'Practice',       badge: '14' },
-    { id: 'glossary',  icon: 'bookmark',           label: 'Glossary',       badge: null },
-    { id: 'progress',  icon: 'target',             label: 'Progress',       badge: null },
+    { id: 'dashboard', icon: 'layout-dashboard', label: 'Dashboard' },
+    { id: 'topics', icon: 'list', label: 'Topics' },
+    { id: 'practice', icon: 'pencil-line', label: 'Practice' },
+    { id: 'glossary', icon: 'bookmark', label: 'Glossary' },
+    { id: 'premium', icon: 'file-text', label: 'Premium Inc.' },
   ];
 
   return (
@@ -28,7 +28,7 @@ export function LeftNav({ activeView, onNav, activeChapter, onChapter }) {
       </div>
 
       <div className="section">
-        {navItems.map(({ id, icon, label, badge }) => (
+        {navItems.map(({ id, icon, label }) => (
           <div
             key={id}
             className={`item ${activeView === id ? 'active' : ''}`}
@@ -36,13 +36,12 @@ export function LeftNav({ activeView, onNav, activeChapter, onChapter }) {
           >
             <Icon name={icon} size={16} />
             <span>{label}</span>
-            {badge && <span className="badge">{badge}</span>}
           </div>
         ))}
       </div>
 
       <div className="section">
-        <div className="heading">Course · SWFT 2026</div>
+        <div className="heading">SWFT 2026 · Chapters</div>
         <div className="chapters">
           {COURSE.map(ch => (
             <div
@@ -54,9 +53,6 @@ export function LeftNav({ activeView, onNav, activeChapter, onChapter }) {
                 <div className="num">CH {ch.num}</div>
                 <div className="title">{ch.title}</div>
               </div>
-              <div className="progress">
-                <div style={{ width: `${Math.round(ch.progress * 100)}%` }} />
-              </div>
             </div>
           ))}
         </div>
@@ -64,17 +60,16 @@ export function LeftNav({ activeView, onNav, activeChapter, onChapter }) {
 
       <div style={{ flex: 1 }} />
       <div className="footer">
-        <div className="av">L</div>
-        <div className="who">
-          <div className="name">Lila Ortiz</div>
-          <div className="role">MAcc, Year 2</div>
+        <div className="who" style={{ paddingLeft: 4 }}>
+          <div className="name">Exam cram</div>
+          <div className="role">No sign-in · no saved progress</div>
         </div>
       </div>
     </nav>
   );
 }
 
-export function TopBar({ crumbs, progress }) {
+export function TopBar({ crumbs }) {
   return (
     <div className="topbar">
       <div className="crumbs">
@@ -86,17 +81,9 @@ export function TopBar({ crumbs, progress }) {
         ))}
       </div>
       <div className="spacer" />
-      {typeof progress === 'number' && (
-        <>
-          <div className="progress-mini">
-            <div style={{ width: `${Math.round(progress * 100)}%` }} />
-          </div>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--ink-2)' }}>
-            {Math.round(progress * 100)}%
-          </span>
-        </>
-      )}
-      <Button variant="subtle" size="sm" icon="search">Search</Button>
+      <Button variant="subtle" size="sm" icon="search">
+        Search
+      </Button>
     </div>
   );
 }
