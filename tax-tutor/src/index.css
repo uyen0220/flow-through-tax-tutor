@@ -391,7 +391,7 @@ body {
 }
 
 /* ========== Tutor rail ========== */
-.tutor { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.tutor { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow: hidden; }
 .tutor-head {
   padding: 16px 18px; border-bottom: 1px solid var(--ink-5);
   display: flex; align-items: center; gap: 10px;
@@ -408,7 +408,7 @@ body {
 .tutor-head .who .name { font-family: var(--font-ui); font-size: 13px; font-weight: 600; }
 .tutor-head .who .sub { font-family: var(--font-ui); font-size: 11px; color: var(--ink-2); }
 .tutor-msgs {
-  flex: 1; overflow-y: auto; padding: 16px 18px;
+  flex: 1; min-height: 0; overflow-y: auto; padding: 16px 18px;
   display: flex; flex-direction: column; gap: 10px;
 }
 .tutor-msg { display: flex; gap: 8px; align-items: flex-start; }
