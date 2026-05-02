@@ -411,7 +411,7 @@ body {
   flex: 1; min-height: 0; overflow-y: auto; padding: 16px 18px;
   display: flex; flex-direction: column; gap: 10px;
 }
-.tutor-msg { display: flex; gap: 8px; align-items: flex-start; }
+.tutor-msg { display: flex; gap: 8px; align-items: flex-start; flex-shrink: 0; }
 .tutor-msg.user { justify-content: flex-end; }
 .tutor-msg .av {
   width: 24px; height: 24px; border-radius: 50%;
