@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import { Icon, Button } from './Primitives';
 import { getLessonById } from '../data/lessons';
 
@@ -20,7 +20,7 @@ export function TutorRail({ lessonId }) {
   const [loading, setLoading] = useState(false);
   const msgsRef = useRef(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (msgsRef.current) {
       msgsRef.current.scrollTop = msgsRef.current.scrollHeight;
     }
